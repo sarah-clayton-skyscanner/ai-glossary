@@ -26,8 +26,40 @@
       text-align: center;
       color: #888;
       font-size: 1em;
-      margin-bottom: 48px;
+      margin-bottom: 24px;
       font-style: italic;
+    }
+
+    .search-wrap {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    #search {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px 18px;
+      font-size: 1em;
+      font-family: Georgia, serif;
+      border: 2px solid #e0d0c4;
+      border-radius: 30px;
+      outline: none;
+      background: #fff;
+      color: #2d2d2d;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      transition: border-color 0.2s;
+    }
+
+    #search:focus {
+      border-color: #c46b2d;
+    }
+
+    #no-results {
+      display: none;
+      text-align: center;
+      color: #aaa;
+      font-style: italic;
+      margin-top: 40px;
     }
 
     .term {
@@ -37,6 +69,12 @@
       padding: 20px 24px;
       margin-bottom: 24px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      scroll-margin-top: 30px;
+      transition: box-shadow 0.3s;
+    }
+
+    .term:target {
+      box-shadow: 0 0 0 3px #c46b2d55;
     }
 
     .term h2 {
@@ -66,10 +104,17 @@
       font-style: italic;
     }
 
-    .see-also span {
+    .see-also a {
       color: #c46b2d;
       font-style: normal;
       font-weight: bold;
+      text-decoration: none;
+      border-bottom: 1px dotted #c46b2d;
+    }
+
+    .see-also a:hover {
+      color: #a0440e;
+      border-bottom-style: solid;
     }
 
     /* Colour-coded headings by category */
@@ -100,157 +145,186 @@
   <h1>🤖 AI Glossary</h1>
   <p class="subtitle">A simple guide to common words and phrases in AI and technology</p>
 
-  <div class="term cat-input border-input">
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="🔍 Search for a term..." autocomplete="off" />
+  </div>
+
+  <p id="no-results">No terms found. Try a different search.</p>
+
+  <div class="term cat-input border-input" id="at-symbol">
     <h2>@ &nbsp;the "at" symbol</h2>
     <p>When you type <code>@</code> while chatting with Claude, it brings up a list of files in your project so you can pick one to include. It's like tagging a friend in a social media post — except instead of a person, you're pointing Claude to a specific file and saying "look at <em>this</em> one." 📎</p>
-    <p class="see-also">See also: <span>Skills</span></p>
+    <p class="see-also">See also: <a href="#skills">Skills</a></p>
   </div>
 
-  <div class="term cat-connect border-connect">
+  <div class="term cat-connect border-connect" id="agents">
     <h2>🤝 &nbsp;Agents (or Subagents)</h2>
     <p>These are helper versions of Claude, each trained for a specific job. Think of them like staff at a restaurant — there's a chef, a waiter, and a host. When Claude needs to do something specialist (like deep research), it hands that job to the right "staff member" so things get done better and faster.</p>
-    <p class="see-also">See also: <span>Tools</span>, <span>MCP</span></p>
+    <p class="see-also">See also: <a href="#tools">Tools</a>, <a href="#mcp">MCP</a></p>
   </div>
 
-  <div class="term cat-connect border-connect">
+  <div class="term cat-connect border-connect" id="api">
     <h2>🔗 &nbsp;API (Application Programming Interface)</h2>
     <p>A way for two pieces of software to talk to each other. You never see it — it works invisibly in the background. Think of it like a waiter in a restaurant: you don't go into the kitchen yourself, you tell the waiter what you want, and they bring back the result. For example, when an app shows you the weather, it's using an API to ask a weather service for the data.</p>
-    <p class="see-also">See also: <span>MCP</span></p>
+    <p class="see-also">See also: <a href="#mcp">MCP</a></p>
   </div>
 
-  <div class="term cat-thinking border-thinking">
+  <div class="term cat-thinking border-thinking" id="brownfield">
     <h2>🏗️ &nbsp;Brownfield</h2>
     <p>A project that already exists — it has old code, history, and quirks built up over time. Working in a brownfield project means you have to be careful not to break things that are already there. Think of it like renovating an old house: you can't just knock down walls without checking what's behind them first.</p>
-    <p class="see-also">See also: <span>Greenfield</span>, <span>Repo</span></p>
+    <p class="see-also">See also: <a href="#greenfield">Greenfield</a>, <a href="#repo">Repo</a></p>
   </div>
 
-  <div class="term cat-file border-file">
+  <div class="term cat-file border-file" id="claude-md">
     <h2>📋 &nbsp;CLAUDE.md</h2>
     <p>A plain text file where you write down the rules and preferences you want Claude to follow in your project. It's like leaving a note for a house-sitter: "Don't feed the cat after 6pm, the wifi password is X, always lock the back door." Claude reads this at the start of every session.</p>
-    <p class="see-also">See also: <span>Hooks</span>, <span>Permissions</span></p>
+    <p class="see-also">See also: <a href="#hooks">Hooks</a>, <a href="#permissions">Permissions</a></p>
   </div>
 
-  <div class="term cat-memory border-memory">
+  <div class="term cat-memory border-memory" id="context-window">
     <h2>🧠 &nbsp;Context Window</h2>
     <p>This is Claude's short-term memory for your conversation. It holds everything said and done so far in a session. When it gets too full, Claude automatically summarises the older parts to make room — like clearing the whiteboard once it's covered in notes, but keeping a summary of what was on it.</p>
-    <p class="see-also">See also: <span>RAG</span></p>
+    <p class="see-also">See also: <a href="#rag">RAG</a></p>
   </div>
 
-  <div class="term cat-input border-input">
+  <div class="term cat-input border-input" id="ctrl-g">
     <h2>⌨️ &nbsp;Ctrl+G</h2>
     <p>A keyboard shortcut that opens your message in a proper text editor (like Notepad or VS Code) instead of typing in the small terminal window. It's useful when you want to write a long, detailed prompt and need more space to work. Once you save and close the editor, your text comes straight back into Claude Code, ready to send.</p>
-    <p class="see-also">See also: <span>TUI</span></p>
+    <p class="see-also">See also: <a href="#tui">TUI</a></p>
   </div>
 
-  <div class="term cat-memory border-memory">
+  <div class="term cat-memory border-memory" id="eval">
     <h2>📝 &nbsp;Eval (Evaluation)</h2>
     <p>A test you run to see how well an AI is performing. Just like a teacher gives students an exam to check what they've learned, an eval gives Claude a set of questions or tasks to see how accurate and reliable its answers are. Teams use evals to spot weaknesses and improve the AI over time.</p>
-    <p class="see-also">See also: <span>Hallucination</span></p>
+    <p class="see-also">See also: <a href="#hallucination">Hallucination</a></p>
   </div>
 
-  <div class="term cat-file border-file">
+  <div class="term cat-file border-file" id="greenfield">
     <h2>🌱 &nbsp;Greenfield</h2>
     <p>A brand new project built from scratch — no old code, no baggage, a completely blank slate. It's called "greenfield" because you're building on fresh, empty land. It's exciting because you can do things however you like, but it also means making a lot of decisions from the very beginning.</p>
-    <p class="see-also">See also: <span>Brownfield</span>, <span>Repo</span></p>
+    <p class="see-also">See also: <a href="#brownfield">Brownfield</a>, <a href="#repo">Repo</a></p>
   </div>
 
-  <div class="term cat-input border-input">
+  <div class="term cat-input border-input" id="gui">
     <h2>🖥️ &nbsp;GUI — Graphical User Interface</h2>
     <p>The visual, clickable world most of us are used to — windows, buttons, menus, icons. When you use an app on your phone or click around on your laptop, you're using a GUI. It's designed to be easy and intuitive, so you don't need to know any technical commands. Pronounced "gooey."</p>
-    <p class="see-also">See also: <span>TUI</span></p>
+    <p class="see-also">See also: <a href="#tui">TUI</a></p>
   </div>
 
-  <div class="term cat-memory border-memory">
+  <div class="term cat-memory border-memory" id="hallucination">
     <h2>👻 &nbsp;Hallucination</h2>
     <p>When an AI confidently says something that is completely made up or wrong. It's not lying on purpose — it genuinely doesn't know it's wrong. Think of it like someone who misremembers a fact but says it with total confidence. This is why it's always worth double-checking important information that an AI gives you.</p>
-    <p class="see-also">See also: <span>Eval</span></p>
+    <p class="see-also">See also: <a href="#eval">Eval</a></p>
   </div>
 
-  <div class="term cat-control border-control">
+  <div class="term cat-control border-control" id="hooks">
     <h2>🪝 &nbsp;Hooks</h2>
     <p>These are automatic actions that happen at set moments — like a reminder that goes off every time you save a document. For example, you could set a hook so that every time Claude edits a file, it automatically tidies up the formatting. You set it once, and it just runs by itself.</p>
-    <p class="see-also">See also: <span>Skills</span>, <span>CLAUDE.md</span></p>
+    <p class="see-also">See also: <a href="#skills">Skills</a>, <a href="#claude-md">CLAUDE.md</a></p>
   </div>
 
-  <div class="term cat-file border-file">
+  <div class="term cat-file border-file" id="indexing-phase">
     <h2>🗂️ &nbsp;Indexing Phase</h2>
     <p>The preparation stage where documents are read, broken up, and filed away so an AI can search through them quickly later. Think of it like a librarian organising a new delivery of books — they read the titles, sort them by topic, and put them on the right shelves before anyone comes to browse. This happens once upfront so that searches later are fast and accurate.</p>
-    <p class="see-also">See also: <span>RAG</span>, <span>Vector</span></p>
+    <p class="see-also">See also: <a href="#rag">RAG</a>, <a href="#vector">Vector</a></p>
   </div>
 
-  <div class="term cat-connect border-connect">
+  <div class="term cat-connect border-connect" id="mcp">
     <h2>🔌 &nbsp;MCP (Model Context Protocol)</h2>
     <p>Think of this as a plug socket. It lets Claude connect to other apps and services — like plugging a lamp into the wall to get power. For example, Claude can plug into GitHub or a database to read and use information from there.</p>
-    <p class="see-also">See also: <span>API</span>, <span>Agents</span></p>
+    <p class="see-also">See also: <a href="#api">API</a>, <a href="#agents">Agents</a></p>
   </div>
 
-  <div class="term cat-control border-control">
+  <div class="term cat-control border-control" id="permissions">
     <h2>🔒 &nbsp;Permissions</h2>
     <p>These are the rules about what Claude is and isn't allowed to do without asking you first. It's like parental controls — you can say "always ask me before deleting anything" or "you can edit files freely." This keeps you in control.</p>
-    <p class="see-also">See also: <span>CLAUDE.md</span>, <span>Hooks</span></p>
+    <p class="see-also">See also: <a href="#claude-md">CLAUDE.md</a>, <a href="#hooks">Hooks</a></p>
   </div>
 
-  <div class="term cat-connect border-connect">
+  <div class="term cat-connect border-connect" id="rag">
     <h2>📚 &nbsp;RAG (Retrieval-Augmented Generation)</h2>
     <p>A way of giving an AI access to a library of documents so it can look things up before answering. Instead of relying only on what it was trained on, the AI can fetch relevant information in real time — like being allowed to check your notes during an exam. This makes answers much more accurate and up to date.</p>
-    <p class="see-also">See also: <span>Indexing Phase</span>, <span>Vector</span>, <span>Context Window</span></p>
+    <p class="see-also">See also: <a href="#indexing-phase">Indexing Phase</a>, <a href="#vector">Vector</a>, <a href="#context-window">Context Window</a></p>
   </div>
 
-  <div class="term cat-file border-file">
+  <div class="term cat-file border-file" id="repo">
     <h2>📁 &nbsp;Repo (Repository)</h2>
     <p>A folder where all the files for a project live — including the full history of every change ever made to them. Think of it like a Google Doc that never forgets anything: you can see who changed what, when, and why. Repos are usually stored on a platform like GitHub so the whole team can access them.</p>
-    <p class="see-also">See also: <span>Worktree</span>, <span>Greenfield</span>, <span>Brownfield</span></p>
+    <p class="see-also">See also: <a href="#worktree">Worktree</a>, <a href="#greenfield">Greenfield</a>, <a href="#brownfield">Brownfield</a></p>
   </div>
 
-  <div class="term cat-input border-input">
+  <div class="term cat-input border-input" id="skills">
     <h2>⚡ &nbsp;Skills (also called Slash Commands)</h2>
     <p>These are shortcuts you can type to give Claude a special set of instructions. You type a <code>/</code> followed by a name, like <code>/review</code>. It's like pressing a button on a microwave that says "Popcorn" — instead of setting the time yourself, it does it all for you automatically.</p>
-    <p class="see-also">See also: <span>Hooks</span>, <span>@</span></p>
+    <p class="see-also">See also: <a href="#hooks">Hooks</a>, <a href="#at-symbol">@</a></p>
   </div>
 
-  <div class="term cat-connect border-connect">
+  <div class="term cat-connect border-connect" id="slingshot">
     <h2>🪃 &nbsp;Slingshot</h2>
     <p>Using AI to get a huge running start on something that would normally take a long time. Instead of building from zero, you use Claude to rapidly produce a first version — a draft, a plan, a block of code — and then refine it from there. Like a slingshot launching a stone much further than you could throw it by hand.</p>
-    <p class="see-also">See also: <span>Vibecoding</span></p>
+    <p class="see-also">See also: <a href="#vibecoding">Vibecoding</a></p>
   </div>
 
-  <div class="term cat-control border-control">
+  <div class="term cat-control border-control" id="tools">
     <h2>🛠️ &nbsp;Tools</h2>
     <p>These are Claude's hands. Without tools, Claude can only talk. With tools, it can actually <em>do</em> things — like read a file, edit code, run a command, or search the web. Each tool is a specific action Claude is allowed to take.</p>
-    <p class="see-also">See also: <span>Agents</span>, <span>MCP</span></p>
+    <p class="see-also">See also: <a href="#agents">Agents</a>, <a href="#mcp">MCP</a></p>
   </div>
 
-  <div class="term cat-input border-input">
+  <div class="term cat-input border-input" id="tui">
     <h2>⬛ &nbsp;TUI — Terminal User Interface</h2>
     <p>A text-only interface where everything is typed rather than clicked. No buttons, no icons — just words and characters on a plain screen. Claude Code itself is a TUI. It might look intimidating at first, but it's actually very powerful once you get used to it. Think of it as the difference between texting someone instructions versus using a touchscreen app.</p>
-    <p class="see-also">See also: <span>GUI</span></p>
+    <p class="see-also">See also: <a href="#gui">GUI</a></p>
   </div>
 
-  <div class="term cat-thinking border-thinking">
+  <div class="term cat-thinking border-thinking" id="ultrathink">
     <h2>💭 &nbsp;ultrathink</h2>
     <p>A special word you can type in your message to make Claude slow down and think much more deeply before answering. There's a whole dial of these — <code>think</code>, <code>think hard</code>, <code>think harder</code>, and <code>ultrathink</code> — each one asking Claude to put in more mental effort than the last. Use it when a problem is complicated and you want Claude's most careful, thorough answer rather than a quick one.</p>
-    <p class="see-also">See also: <span>Eval</span></p>
+    <p class="see-also">See also: <a href="#eval">Eval</a></p>
   </div>
 
-  <div class="term cat-thinking border-thinking">
+  <div class="term cat-thinking border-thinking" id="vector">
     <h2>📐 &nbsp;Vector</h2>
     <p>A list of numbers that represents the <em>meaning</em> of a word, sentence, or document in a way a computer can understand. Words with similar meanings end up with similar numbers, so the computer can find related things even if they don't use the exact same words. It's like giving every idea in your library a unique postcode — things that are close in meaning get postcodes near each other, making them easy to find together.</p>
-    <p class="see-also">See also: <span>RAG</span>, <span>Indexing Phase</span></p>
+    <p class="see-also">See also: <a href="#rag">RAG</a>, <a href="#indexing-phase">Indexing Phase</a></p>
   </div>
 
-  <div class="term cat-thinking border-thinking">
+  <div class="term cat-thinking border-thinking" id="vibecoding">
     <h2>✨ &nbsp;Vibecoding</h2>
     <p>Writing software by describing what you want in plain English and letting AI do the actual coding for you — guided by feel and instinct rather than deep technical knowledge. You focus on <em>what</em> you want to build, and the AI figures out <em>how</em> to build it. It's made coding accessible to people who wouldn't traditionally call themselves developers.</p>
-    <p class="see-also">See also: <span>Slingshot</span></p>
+    <p class="see-also">See also: <a href="#slingshot">Slingshot</a></p>
   </div>
 
-  <div class="term cat-file border-file">
+  <div class="term cat-file border-file" id="worktree">
     <h2>🌿 &nbsp;Worktree</h2>
     <p>A separate copy of your project that Claude can work on without touching your main version. Imagine photocopying a document before letting someone mark it up in red pen — the original stays safe.</p>
-    <p class="see-also">See also: <span>Repo</span></p>
+    <p class="see-also">See also: <a href="#repo">Repo</a></p>
   </div>
 
   <footer>Last updated: March 2026 &nbsp;·&nbsp; Made with Claude Code 🤖</footer>
+
+  <script>
+    const search = document.getElementById('search');
+    const terms = document.querySelectorAll('.term');
+    const noResults = document.getElementById('no-results');
+
+    search.addEventListener('input', function () {
+      const query = this.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      terms.forEach(function (term) {
+        const text = term.innerText.toLowerCase();
+        if (!query || text.includes(query)) {
+          term.style.display = '';
+          visibleCount++;
+        } else {
+          term.style.display = 'none';
+        }
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    });
+  </script>
 
 </body>
 </html>
