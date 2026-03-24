@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Claude Code Glossary</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      background-color: #fdf6f0;
+      color: #2d2d2d;
+      max-width: 780px;
+      margin: 60px auto;
+      padding: 0 24px 60px;
+      line-height: 1.8;
+    }
+
+    h1 {
+      font-size: 2.4em;
+      color: #c46b2d;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 1em;
+      margin-bottom: 48px;
+      font-style: italic;
+    }
+
+    .term {
+      background: #ffffff;
+      border-left: 5px solid #c46b2d;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .term h2 {
+      margin: 0 0 8px 0;
+      font-size: 1.25em;
+    }
+
+    .term p {
+      margin: 0;
+      font-size: 1em;
+      color: #444;
+    }
+
+    .term code {
+      background: #f0e8df;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.95em;
+      color: #a0440e;
+    }
+
+    /* Colour-coded headings by category */
+    .cat-input    h2 { color: #9b59b6; }
+    .cat-thinking h2 { color: #2980b9; }
+    .cat-control  h2 { color: #27ae60; }
+    .cat-connect  h2 { color: #e67e22; }
+    .cat-memory   h2 { color: #c0392b; }
+    .cat-file     h2 { color: #16a085; }
+
+    .border-input    { border-left-color: #9b59b6; }
+    .border-thinking { border-left-color: #2980b9; }
+    .border-control  { border-left-color: #27ae60; }
+    .border-connect  { border-left-color: #e67e22; }
+    .border-memory   { border-left-color: #c0392b; }
+    .border-file     { border-left-color: #16a085; }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 0.85em;
+      margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🤖 Claude Code Glossary</h1>
+  <p class="subtitle">A simple guide to common words and phrases in Claude Code</p>
+
+  <div class="term cat-input border-input">
+    <h2>@ &nbsp;the "at" symbol</h2>
+    <p>When you type <code>@</code> while chatting with Claude, it brings up a list of files in your project so you can pick one to include. It's like tagging a friend in a social media post — except instead of a person, you're pointing Claude to a specific file and saying "look at <em>this</em> one." 📎</p>
+  </div>
+
+  <div class="term cat-connect border-connect">
+    <h2>🤝 &nbsp;Agents (or Subagents)</h2>
+    <p>These are helper versions of Claude, each trained for a specific job. Think of them like staff at a restaurant — there's a chef, a waiter, and a host. When Claude needs to do something specialist (like deep research), it hands that job to the right "staff member" so things get done better and faster.</p>
+  </div>
+
+  <div class="term cat-thinking border-thinking">
+    <h2>🏗️ &nbsp;Brownfield</h2>
+    <p>A project that already exists — it has old code, history, and quirks built up over time. Working in a brownfield project means you have to be careful not to break things that are already there. Think of it like renovating an old house: you can't just knock down walls without checking what's behind them first.</p>
+  </div>
+
+  <div class="term cat-file border-file">
+    <h2>📋 &nbsp;CLAUDE.md</h2>
+    <p>A plain text file where you write down the rules and preferences you want Claude to follow in your project. It's like leaving a note for a house-sitter: "Don't feed the cat after 6pm, the wifi password is X, always lock the back door." Claude reads this at the start of every session.</p>
+  </div>
+
+  <div class="term cat-memory border-memory">
+    <h2>🧠 &nbsp;Context Window</h2>
+    <p>This is Claude's short-term memory for your conversation. It holds everything said and done so far in a session. When it gets too full, Claude automatically summarises the older parts to make room — like clearing the whiteboard once it's covered in notes, but keeping a summary of what was on it.</p>
+  </div>
+
+  <div class="term cat-input border-input">
+    <h2>⌨️ &nbsp;Ctrl+G</h2>
+    <p>A keyboard shortcut that opens your message in a proper text editor (like Notepad or VS Code) instead of typing in the small terminal window. It's useful when you want to write a long, detailed prompt and need more space to work. Once you save and close the editor, your text comes straight back into Claude Code, ready to send.</p>
+  </div>
+
+  <div class="term cat-memory border-memory">
+    <h2>📝 &nbsp;Eval (Evaluation)</h2>
+    <p>A test you run to see how well an AI is performing. Just like a teacher gives students an exam to check what they've learned, an eval gives Claude a set of questions or tasks to see how accurate and reliable its answers are. Teams use evals to spot weaknesses and improve the AI over time.</p>
+  </div>
+
+  <div class="term cat-file border-file">
+    <h2>🌱 &nbsp;Greenfield</h2>
+    <p>A brand new project built from scratch — no old code, no baggage, a completely blank slate. It's called "greenfield" because you're building on fresh, empty land. It's exciting because you can do things however you like, but it also means making a lot of decisions from the very beginning.</p>
+  </div>
+
+  <div class="term cat-memory border-memory">
+    <h2>👻 &nbsp;Hallucination</h2>
+    <p>When an AI confidently says something that is completely made up or wrong. It's not lying on purpose — it genuinely doesn't know it's wrong. Think of it like someone who misremembers a fact but says it with total confidence. This is why it's always worth double-checking important information that an AI gives you.</p>
+  </div>
+
+  <div class="term cat-control border-control">
+    <h2>🪝 &nbsp;Hooks</h2>
+    <p>These are automatic actions that happen at set moments — like a reminder that goes off every time you save a document. For example, you could set a hook so that every time Claude edits a file, it automatically tidies up the formatting. You set it once, and it just runs by itself.</p>
+  </div>
+
+  <div class="term cat-file border-file">
+    <h2>🗂️ &nbsp;Indexing Phase</h2>
+    <p>The preparation stage where documents are read, broken up, and filed away so an AI can search through them quickly later. Think of it like a librarian organising a new delivery of books — they read the titles, sort them by topic, and put them on the right shelves before anyone comes to browse. This happens once upfront so that searches later are fast and accurate.</p>
+  </div>
+
+  <div class="term cat-connect border-connect">
+    <h2>🔌 &nbsp;MCP (Model Context Protocol)</h2>
+    <p>Think of this as a plug socket. It lets Claude connect to other apps and services — like plugging a lamp into the wall to get power. For example, Claude can plug into GitHub or a database to read and use information from there.</p>
+  </div>
+
+  <div class="term cat-control border-control">
+    <h2>🔒 &nbsp;Permissions</h2>
+    <p>These are the rules about what Claude is and isn't allowed to do without asking you first. It's like parental controls — you can say "always ask me before deleting anything" or "you can edit files freely." This keeps you in control.</p>
+  </div>
+
+  <div class="term cat-connect border-connect">
+    <h2>📚 &nbsp;RAG (Retrieval-Augmented Generation)</h2>
+    <p>A way of giving an AI access to a library of documents so it can look things up before answering. Instead of relying only on what it was trained on, the AI can fetch relevant information in real time — like being allowed to check your notes during an exam. This makes answers much more accurate and up to date.</p>
+  </div>
+
+  <div class="term cat-input border-input">
+    <h2>⚡ &nbsp;Skills (also called Slash Commands)</h2>
+    <p>These are shortcuts you can type to give Claude a special set of instructions. You type a <code>/</code> followed by a name, like <code>/review</code>. It's like pressing a button on a microwave that says "Popcorn" — instead of setting the time yourself, it does it all for you automatically.</p>
+  </div>
+
+  <div class="term cat-connect border-connect">
+    <h2>🪃 &nbsp;Slingshot</h2>
+    <p>Using AI to get a huge running start on something that would normally take a long time. Instead of building from zero, you use Claude to rapidly produce a first version — a draft, a plan, a block of code — and then refine it from there. Like a slingshot launching a stone much further than you could throw it by hand.</p>
+  </div>
+
+  <div class="term cat-control border-control">
+    <h2>🛠️ &nbsp;Tools</h2>
+    <p>These are Claude's hands. Without tools, Claude can only talk. With tools, it can actually <em>do</em> things — like read a file, edit code, run a command, or search the web. Each tool is a specific action Claude is allowed to take.</p>
+  </div>
+
+  <div class="term cat-thinking border-thinking">
+    <h2>💭 &nbsp;ultrathink</h2>
+    <p>A special word you can type in your message to make Claude slow down and think much more deeply before answering. There's a whole dial of these — <code>think</code>, <code>think hard</code>, <code>think harder</code>, and <code>ultrathink</code> — each one asking Claude to put in more mental effort than the last. Use it when a problem is complicated and you want Claude's most careful, thorough answer rather than a quick one.</p>
+  </div>
+
+  <div class="term cat-thinking border-thinking">
+    <h2>📐 &nbsp;Vector</h2>
+    <p>A list of numbers that represents the <em>meaning</em> of a word, sentence, or document in a way a computer can understand. Words with similar meanings end up with similar numbers, so the computer can find related things even if they don't use the exact same words. It's like giving every idea in your library a unique postcode — things that are close in meaning get postcodes near each other, making them easy to find together.</p>
+  </div>
+
+  <div class="term cat-file border-file">
+    <h2>🌿 &nbsp;Worktree</h2>
+    <p>A separate copy of your project that Claude can work on without touching your main version. Imagine photocopying a document before letting someone mark it up in red pen — the original stays safe.</p>
+  </div>
+
+  <footer>Last updated: March 2026 &nbsp;·&nbsp; Made with Claude Code 🤖</footer>
+
+</body>
+</html>
