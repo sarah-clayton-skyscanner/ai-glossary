@@ -31,8 +31,142 @@
     }
 
     .search-wrap {
-      margin-bottom: 40px;
+      margin-bottom: 16px;
       text-align: center;
+    }
+
+    .suggest-wrap {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .suggest-btn {
+      display: inline-block;
+      padding: 10px 22px;
+      background-color: #c46b2d;
+      color: #fff;
+      font-family: Georgia, serif;
+      font-size: 0.95em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+      transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .suggest-btn:hover {
+      background-color: #a0440e;
+      transform: translateY(-1px);
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+
+    .modal h3 {
+      margin: 0 0 6px 0;
+      font-size: 1.3em;
+      color: #c46b2d;
+    }
+
+    .modal p.modal-sub {
+      margin: 0 0 20px 0;
+      color: #888;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .modal label {
+      display: block;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 4px;
+    }
+
+    .modal input, .modal textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 14px;
+      font-family: Georgia, serif;
+      font-size: 0.95em;
+      border: 2px solid #e0d0c4;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      color: #2d2d2d;
+    }
+
+    .modal input:focus, .modal textarea:focus {
+      border-color: #c46b2d;
+    }
+
+    .modal textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .modal-cancel {
+      padding: 9px 20px;
+      background: none;
+      border: 2px solid #e0d0c4;
+      border-radius: 30px;
+      font-family: Georgia, serif;
+      font-size: 0.9em;
+      cursor: pointer;
+      color: #888;
+      transition: border-color 0.2s;
+    }
+
+    .modal-cancel:hover { border-color: #aaa; }
+
+    .modal-submit {
+      padding: 9px 22px;
+      background-color: #c46b2d;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-family: Georgia, serif;
+      font-size: 0.9em;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .modal-submit:hover { background-color: #a0440e; }
+    .modal-submit:disabled { background-color: #dbb99a; cursor: default; }
+
+    .modal-message {
+      text-align: center;
+      padding: 16px 0 4px;
+      font-size: 0.95em;
+      display: none;
     }
 
     #search {
@@ -147,6 +281,27 @@
 
   <div class="search-wrap">
     <input type="text" id="search" placeholder="🔍 Search for a term..." autocomplete="off" />
+  </div>
+
+  <div class="suggest-wrap">
+    <button class="suggest-btn" onclick="openModal()">💡 Suggest a term</button>
+  </div>
+
+  <!-- Suggestion modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal">
+      <h3>💡 Suggest a term</h3>
+      <p class="modal-sub">Got a word or phrase that's left you scratching your head? Send it in.</p>
+      <label for="term-input">Term <span style="color:#c46b2d">*</span></label>
+      <input type="text" id="term-input" placeholder="e.g. Prompt Engineering" />
+      <label for="context-input">Any context? <span style="color:#999">(optional)</span></label>
+      <textarea id="context-input" placeholder="Where did you come across it? Any guesses at what it means?"></textarea>
+      <div class="modal-buttons">
+        <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+        <button class="modal-submit" id="submit-btn" onclick="submitSuggestion()">Send suggestion</button>
+      </div>
+      <div class="modal-message" id="modal-message"></div>
+    </div>
   </div>
 
   <p id="no-results">No terms found. Try a different search.</p>
@@ -304,6 +459,7 @@
   <footer>Last updated: March 2026 &nbsp;·&nbsp; Made with Claude Code 🤖</footer>
 
   <script>
+    // ── Search ──────────────────────────────────────────────
     const search = document.getElementById('search');
     const terms = document.querySelectorAll('.term');
     const noResults = document.getElementById('no-results');
@@ -311,7 +467,6 @@
     search.addEventListener('input', function () {
       const query = this.value.toLowerCase().trim();
       let visibleCount = 0;
-
       terms.forEach(function (term) {
         const text = term.innerText.toLowerCase();
         if (!query || text.includes(query)) {
@@ -321,9 +476,66 @@
           term.style.display = 'none';
         }
       });
-
       noResults.style.display = visibleCount === 0 ? 'block' : 'none';
     });
+
+    // ── Suggest a term modal ─────────────────────────────────
+
+    // Paste your Power Automate URL below (replace the placeholder)
+    const POWER_AUTOMATE_URL = 'YOUR_POWER_AUTOMATE_URL_HERE';
+
+    function openModal() {
+      document.getElementById('modal-overlay').classList.add('open');
+      document.getElementById('term-input').focus();
+      document.getElementById('modal-message').style.display = 'none';
+      document.getElementById('modal-message').textContent = '';
+      document.getElementById('term-input').value = '';
+      document.getElementById('context-input').value = '';
+      document.getElementById('submit-btn').disabled = false;
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modal-overlay')) closeModal();
+    }
+
+    async function submitSuggestion() {
+      const term = document.getElementById('term-input').value.trim();
+      const context = document.getElementById('context-input').value.trim();
+      const btn = document.getElementById('submit-btn');
+      const msg = document.getElementById('modal-message');
+
+      if (!term) {
+        document.getElementById('term-input').focus();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      msg.style.display = 'none';
+
+      try {
+        await fetch(POWER_AUTOMATE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ term, context })
+        });
+        msg.style.display = 'block';
+        msg.style.color = '#27ae60';
+        msg.textContent = '✅ Thanks! Your suggestion has been sent.';
+        btn.textContent = 'Sent!';
+        setTimeout(closeModal, 2000);
+      } catch (err) {
+        msg.style.display = 'block';
+        msg.style.color = '#c0392b';
+        msg.textContent = '❌ Something went wrong. Please try again.';
+        btn.disabled = false;
+        btn.textContent = 'Send suggestion';
+      }
+    }
   </script>
 
 </body>
