@@ -31,142 +31,8 @@
     }
 
     .search-wrap {
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .suggest-wrap {
-      text-align: center;
       margin-bottom: 40px;
-    }
-
-    .suggest-btn {
-      display: inline-block;
-      padding: 10px 22px;
-      background-color: #c46b2d;
-      color: #fff;
-      font-family: Georgia, serif;
-      font-size: 0.95em;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-      transition: background-color 0.2s, transform 0.1s;
-    }
-
-    .suggest-btn:hover {
-      background-color: #a0440e;
-      transform: translateY(-1px);
-    }
-
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      z-index: 100;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-overlay.open {
-      display: flex;
-    }
-
-    .modal {
-      background: #fff;
-      border-radius: 12px;
-      padding: 32px;
-      width: 100%;
-      max-width: 460px;
-      margin: 0 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    }
-
-    .modal h3 {
-      margin: 0 0 6px 0;
-      font-size: 1.3em;
-      color: #c46b2d;
-    }
-
-    .modal p.modal-sub {
-      margin: 0 0 20px 0;
-      color: #888;
-      font-size: 0.9em;
-      font-style: italic;
-    }
-
-    .modal label {
-      display: block;
-      font-size: 0.9em;
-      color: #555;
-      margin-bottom: 4px;
-    }
-
-    .modal input, .modal textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 10px 14px;
-      font-family: Georgia, serif;
-      font-size: 0.95em;
-      border: 2px solid #e0d0c4;
-      border-radius: 8px;
-      margin-bottom: 16px;
-      outline: none;
-      transition: border-color 0.2s;
-      color: #2d2d2d;
-    }
-
-    .modal input:focus, .modal textarea:focus {
-      border-color: #c46b2d;
-    }
-
-    .modal textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .modal-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .modal-cancel {
-      padding: 9px 20px;
-      background: none;
-      border: 2px solid #e0d0c4;
-      border-radius: 30px;
-      font-family: Georgia, serif;
-      font-size: 0.9em;
-      cursor: pointer;
-      color: #888;
-      transition: border-color 0.2s;
-    }
-
-    .modal-cancel:hover { border-color: #aaa; }
-
-    .modal-submit {
-      padding: 9px 22px;
-      background-color: #c46b2d;
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      font-family: Georgia, serif;
-      font-size: 0.9em;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    .modal-submit:hover { background-color: #a0440e; }
-    .modal-submit:disabled { background-color: #dbb99a; cursor: default; }
-
-    .modal-message {
       text-align: center;
-      padding: 16px 0 4px;
-      font-size: 0.95em;
-      display: none;
     }
 
     #search {
@@ -283,27 +149,6 @@
     <input type="text" id="search" placeholder="🔍 Search for a term..." autocomplete="off" />
   </div>
 
-  <div class="suggest-wrap">
-    <button class="suggest-btn" onclick="openModal()">💡 Suggest a term</button>
-  </div>
-
-  <!-- Suggestion modal -->
-  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
-    <div class="modal">
-      <h3>💡 Suggest a term</h3>
-      <p class="modal-sub">Got a word or phrase that's left you scratching your head? Send it in.</p>
-      <label for="term-input">Term <span style="color:#c46b2d">*</span></label>
-      <input type="text" id="term-input" placeholder="e.g. Prompt Engineering" />
-      <label for="context-input">Any context? <span style="color:#999">(optional)</span></label>
-      <textarea id="context-input" placeholder="Where did you come across it? Any guesses at what it means?"></textarea>
-      <div class="modal-buttons">
-        <button class="modal-cancel" onclick="closeModal()">Cancel</button>
-        <button class="modal-submit" id="submit-btn" onclick="submitSuggestion()">Send suggestion</button>
-      </div>
-      <div class="modal-message" id="modal-message"></div>
-    </div>
-  </div>
-
   <p id="no-results">No terms found. Try a different search.</p>
 
   <div class="term cat-input border-input" id="at-symbol">
@@ -316,6 +161,12 @@
     <h2>🤝 &nbsp;Agents (or Subagents)</h2>
     <p>These are helper versions of Claude, each trained for a specific job. Think of them like staff at a restaurant — there's a chef, a waiter, and a host. When Claude needs to do something specialist (like deep research), it hands that job to the right "staff member" so things get done better and faster.</p>
     <p class="see-also">See also: <a href="#tools">Tools</a>, <a href="#mcp">MCP</a></p>
+  </div>
+
+  <div class="term cat-thinking border-thinking" id="agentic">
+    <h2>🚀 &nbsp;Agentic</h2>
+    <p>Describes AI that doesn't just answer questions but takes a sequence of actions on its own to complete a goal. Instead of you doing every step, an agentic AI plans, decides, and acts — checking its own work along the way. It's the difference between asking someone a question and delegating a whole project to them. Claude Code is agentic: you give it a task, and it figures out the steps itself.</p>
+    <p class="see-also">See also: <a href="#agents">Agents</a>, <a href="#tools">Tools</a></p>
   </div>
 
   <div class="term cat-connect border-connect" id="api">
@@ -339,7 +190,13 @@
   <div class="term cat-memory border-memory" id="context-window">
     <h2>🧠 &nbsp;Context Window</h2>
     <p>This is Claude's short-term memory for your conversation. It holds everything said and done so far in a session. When it gets too full, Claude automatically summarises the older parts to make room — like clearing the whiteboard once it's covered in notes, but keeping a summary of what was on it.</p>
-    <p class="see-also">See also: <a href="#rag">RAG</a></p>
+    <p class="see-also">See also: <a href="#token">Token</a>, <a href="#rag">RAG</a></p>
+  </div>
+
+  <div class="term cat-connect border-connect" id="copilot">
+    <h2>🧑‍✈️ &nbsp;Copilot</h2>
+    <p>An AI assistant built directly into a tool you're already using, so it can help you without switching context. Microsoft Copilot sits inside Word, Excel, and Teams. GitHub Copilot helps developers write code inside their editor. The idea is that the AI rides alongside you, ready to help at any moment — rather than being a separate thing you have to go and visit.</p>
+    <p class="see-also">See also: <a href="#agents">Agents</a>, <a href="#mcp">MCP</a></p>
   </div>
 
   <div class="term cat-input border-input" id="ctrl-g">
@@ -354,10 +211,22 @@
     <p class="see-also">See also: <a href="#hallucination">Hallucination</a></p>
   </div>
 
+  <div class="term cat-thinking border-thinking" id="fine-tuning">
+    <h2>🔧 &nbsp;Fine-tuning</h2>
+    <p>Taking a general-purpose AI and training it further on specific material — like company documents, tone of voice guidelines, or industry data — so it becomes more expert in that area. It's like hiring a brilliant generalist and then sending them on a specialist training course. The core skills stay the same; they just get sharper in one particular area.</p>
+    <p class="see-also">See also: <a href="#training-data">Training Data</a>, <a href="#llm">LLM</a></p>
+  </div>
+
   <div class="term cat-file border-file" id="greenfield">
     <h2>🌱 &nbsp;Greenfield</h2>
     <p>A brand new project built from scratch — no old code, no baggage, a completely blank slate. It's called "greenfield" because you're building on fresh, empty land. It's exciting because you can do things however you like, but it also means making a lot of decisions from the very beginning.</p>
     <p class="see-also">See also: <a href="#brownfield">Brownfield</a>, <a href="#repo">Repo</a></p>
+  </div>
+
+  <div class="term cat-control border-control" id="guardrails">
+    <h2>🛡️ &nbsp;Guardrails</h2>
+    <p>Rules and limits built into an AI to stop it from doing harmful, embarrassing, or unethical things. They're the invisible fences that keep AI behaviour within acceptable boundaries — preventing it from giving dangerous advice, generating offensive content, or going off-script in ways that could cause problems. Most AI tools you'll encounter at work have guardrails set by whoever deployed them.</p>
+    <p class="see-also">See also: <a href="#permissions">Permissions</a>, <a href="#hallucination">Hallucination</a></p>
   </div>
 
   <div class="term cat-input border-input" id="gui">
@@ -369,7 +238,7 @@
   <div class="term cat-memory border-memory" id="hallucination">
     <h2>👻 &nbsp;Hallucination</h2>
     <p>When an AI confidently says something that is completely made up or wrong. It's not lying on purpose — it genuinely doesn't know it's wrong. Think of it like someone who misremembers a fact but says it with total confidence. This is why it's always worth double-checking important information that an AI gives you.</p>
-    <p class="see-also">See also: <a href="#eval">Eval</a></p>
+    <p class="see-also">See also: <a href="#eval">Eval</a>, <a href="#guardrails">Guardrails</a></p>
   </div>
 
   <div class="term cat-control border-control" id="hooks">
@@ -384,16 +253,40 @@
     <p class="see-also">See also: <a href="#rag">RAG</a>, <a href="#vector">Vector</a></p>
   </div>
 
+  <div class="term cat-thinking border-thinking" id="llm">
+    <h2>🧩 &nbsp;LLM (Large Language Model)</h2>
+    <p>The type of AI that powers tools like Claude, ChatGPT, and Gemini. It's been trained on enormous amounts of text — books, websites, articles, code — and learned to understand and generate human language from all of it. The "large" part refers to just how much it has read and how complex it is under the hood. When people talk about "AI" in a work context, they're usually talking about an LLM.</p>
+    <p class="see-also">See also: <a href="#training-data">Training Data</a>, <a href="#token">Token</a>, <a href="#fine-tuning">Fine-tuning</a></p>
+  </div>
+
   <div class="term cat-connect border-connect" id="mcp">
     <h2>🔌 &nbsp;MCP (Model Context Protocol)</h2>
     <p>Think of this as a plug socket. It lets Claude connect to other apps and services — like plugging a lamp into the wall to get power. For example, Claude can plug into GitHub or a database to read and use information from there.</p>
     <p class="see-also">See also: <a href="#api">API</a>, <a href="#agents">Agents</a></p>
   </div>
 
+  <div class="term cat-thinking border-thinking" id="multimodal">
+    <h2>🖼️ &nbsp;Multimodal</h2>
+    <p>An AI that can understand and work with more than just text — like images, audio, PDFs, or spreadsheets. For example, you can show a multimodal AI a photo and ask "what's in this picture?" or hand it a document and ask it to summarise. Most modern AI assistants are now multimodal, which is what makes them useful for real-world work tasks rather than just chat.</p>
+    <p class="see-also">See also: <a href="#llm">LLM</a>, <a href="#rag">RAG</a></p>
+  </div>
+
   <div class="term cat-control border-control" id="permissions">
     <h2>🔒 &nbsp;Permissions</h2>
     <p>These are the rules about what Claude is and isn't allowed to do without asking you first. It's like parental controls — you can say "always ask me before deleting anything" or "you can edit files freely." This keeps you in control.</p>
     <p class="see-also">See also: <a href="#claude-md">CLAUDE.md</a>, <a href="#hooks">Hooks</a></p>
+  </div>
+
+  <div class="term cat-input border-input" id="prompt">
+    <h2>✏️ &nbsp;Prompt</h2>
+    <p>The message or question you type to an AI — your side of the conversation. It's the instruction, request, or question that tells the AI what you need. A vague prompt tends to get a vague answer; a clear, specific prompt tends to get a much more useful one. Everything else in AI builds on top of this one simple idea.</p>
+    <p class="see-also">See also: <a href="#prompt-engineering">Prompt Engineering</a>, <a href="#context-window">Context Window</a></p>
+  </div>
+
+  <div class="term cat-input border-input" id="prompt-engineering">
+    <h2>🎯 &nbsp;Prompt Engineering</h2>
+    <p>The skill of writing prompts that get better results from an AI. It sounds fancier than it is — it's basically learning that "summarise this in 3 bullet points for a non-technical audience" gets a more useful answer than just "summarise this." The more specific and clear you are about what you want, who it's for, and what format you'd like, the better. No coding required.</p>
+    <p class="see-also">See also: <a href="#prompt">Prompt</a>, <a href="#ultrathink">ultrathink</a></p>
   </div>
 
   <div class="term cat-connect border-connect" id="rag">
@@ -408,6 +301,12 @@
     <p class="see-also">See also: <a href="#worktree">Worktree</a>, <a href="#greenfield">Greenfield</a>, <a href="#brownfield">Brownfield</a></p>
   </div>
 
+  <div class="term cat-control border-control" id="sandboxing">
+    <h2>📦 &nbsp;Sandboxing</h2>
+    <p>A safety technique where code or AI actions run in an isolated environment, cut off from the rest of your system, so that if something goes wrong it can't cause damage outside that contained space. Think of it like testing a new recipe in a tiny batch before making it for a hundred people — you get the learning without the risk. It's one of the ways AI tools are made safer to use on real systems.</p>
+    <p class="see-also">See also: <a href="#permissions">Permissions</a>, <a href="#guardrails">Guardrails</a></p>
+  </div>
+
   <div class="term cat-input border-input" id="skills">
     <h2>⚡ &nbsp;Skills (also called Slash Commands)</h2>
     <p>These are shortcuts you can type to give Claude a special set of instructions. You type a <code>/</code> followed by a name, like <code>/review</code>. It's like pressing a button on a microwave that says "Popcorn" — instead of setting the time yourself, it does it all for you automatically.</p>
@@ -420,10 +319,28 @@
     <p class="see-also">See also: <a href="#vibecoding">Vibecoding</a></p>
   </div>
 
+  <div class="term cat-thinking border-thinking" id="temperature">
+    <h2>🌡️ &nbsp;Temperature</h2>
+    <p>A setting that controls how creative or unpredictable an AI's responses are. Low temperature means careful, consistent, predictable answers. High temperature means more creative, varied, and sometimes surprising ones. It's like the difference between asking someone to proofread a legal contract (low temperature) versus brainstorm wild ideas for a campaign (high temperature). Most AI tools set this behind the scenes, but it's useful to know it exists.</p>
+    <p class="see-also">See also: <a href="#llm">LLM</a>, <a href="#prompt">Prompt</a></p>
+  </div>
+
+  <div class="term cat-memory border-memory" id="token">
+    <h2>🪙 &nbsp;Token</h2>
+    <p>The unit an AI uses to process text — roughly three-quarters of a word. When you hear about "token limits," it means there's a cap on how much text can be handled in one go. Think of tokens like the credits on a pay-as-you-go phone: every word you type (and every word the AI writes back) uses a few. This is why very long conversations can slow down or hit limits.</p>
+    <p class="see-also">See also: <a href="#context-window">Context Window</a>, <a href="#llm">LLM</a></p>
+  </div>
+
   <div class="term cat-control border-control" id="tools">
     <h2>🛠️ &nbsp;Tools</h2>
     <p>These are Claude's hands. Without tools, Claude can only talk. With tools, it can actually <em>do</em> things — like read a file, edit code, run a command, or search the web. Each tool is a specific action Claude is allowed to take.</p>
     <p class="see-also">See also: <a href="#agents">Agents</a>, <a href="#mcp">MCP</a></p>
+  </div>
+
+  <div class="term cat-memory border-memory" id="training-data">
+    <h2>📖 &nbsp;Training Data</h2>
+    <p>The enormous collection of text (and other content) that an AI was taught on before you ever met it — books, websites, articles, code, and more. It's effectively the AI's entire education. The quality and range of the training data shapes what the AI knows, how it communicates, and where its blind spots might be. It also explains why AI knowledge has a cut-off date: it only knows what it read up to a certain point.</p>
+    <p class="see-also">See also: <a href="#llm">LLM</a>, <a href="#fine-tuning">Fine-tuning</a>, <a href="#hallucination">Hallucination</a></p>
   </div>
 
   <div class="term cat-input border-input" id="tui">
@@ -435,7 +352,7 @@
   <div class="term cat-thinking border-thinking" id="ultrathink">
     <h2>💭 &nbsp;ultrathink</h2>
     <p>A special word you can type in your message to make Claude slow down and think much more deeply before answering. There's a whole dial of these — <code>think</code>, <code>think hard</code>, <code>think harder</code>, and <code>ultrathink</code> — each one asking Claude to put in more mental effort than the last. Use it when a problem is complicated and you want Claude's most careful, thorough answer rather than a quick one.</p>
-    <p class="see-also">See also: <a href="#eval">Eval</a></p>
+    <p class="see-also">See also: <a href="#prompt-engineering">Prompt Engineering</a>, <a href="#eval">Eval</a></p>
   </div>
 
   <div class="term cat-thinking border-thinking" id="vector">
@@ -459,7 +376,6 @@
   <footer>Last updated: March 2026 &nbsp;·&nbsp; Made with Claude Code 🤖</footer>
 
   <script>
-    // ── Search ──────────────────────────────────────────────
     const search = document.getElementById('search');
     const terms = document.querySelectorAll('.term');
     const noResults = document.getElementById('no-results');
@@ -478,64 +394,6 @@
       });
       noResults.style.display = visibleCount === 0 ? 'block' : 'none';
     });
-
-    // ── Suggest a term modal ─────────────────────────────────
-
-    // Paste your Power Automate URL below (replace the placeholder)
-    const POWER_AUTOMATE_URL = 'YOUR_POWER_AUTOMATE_URL_HERE';
-
-    function openModal() {
-      document.getElementById('modal-overlay').classList.add('open');
-      document.getElementById('term-input').focus();
-      document.getElementById('modal-message').style.display = 'none';
-      document.getElementById('modal-message').textContent = '';
-      document.getElementById('term-input').value = '';
-      document.getElementById('context-input').value = '';
-      document.getElementById('submit-btn').disabled = false;
-    }
-
-    function closeModal() {
-      document.getElementById('modal-overlay').classList.remove('open');
-    }
-
-    function handleOverlayClick(e) {
-      if (e.target === document.getElementById('modal-overlay')) closeModal();
-    }
-
-    async function submitSuggestion() {
-      const term = document.getElementById('term-input').value.trim();
-      const context = document.getElementById('context-input').value.trim();
-      const btn = document.getElementById('submit-btn');
-      const msg = document.getElementById('modal-message');
-
-      if (!term) {
-        document.getElementById('term-input').focus();
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = 'Sending...';
-      msg.style.display = 'none';
-
-      try {
-        await fetch(POWER_AUTOMATE_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ term, context })
-        });
-        msg.style.display = 'block';
-        msg.style.color = '#27ae60';
-        msg.textContent = '✅ Thanks! Your suggestion has been sent.';
-        btn.textContent = 'Sent!';
-        setTimeout(closeModal, 2000);
-      } catch (err) {
-        msg.style.display = 'block';
-        msg.style.color = '#c0392b';
-        msg.textContent = '❌ Something went wrong. Please try again.';
-        btn.disabled = false;
-        btn.textContent = 'Send suggestion';
-      }
-    }
   </script>
 
 </body>
