@@ -132,6 +132,18 @@
     .border-memory   { border-left-color: #c0392b; }
     .border-file     { border-left-color: #16a085; }
 
+    .last-updated {
+      position: fixed;
+      top: 14px;
+      right: 20px;
+      font-size: 0.78em;
+      color: #aaa;
+      font-style: italic;
+      background: #fdf6f0;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+
     footer {
       text-align: center;
       color: #aaa;
@@ -141,6 +153,8 @@
   </style>
 </head>
 <body>
+
+  <div class="last-updated" id="last-updated"></div>
 
   <h1>🤖 AI Glossary</h1>
   <p class="subtitle">A simple guide to common words and phrases in AI and technology</p>
@@ -397,9 +411,16 @@
     <p class="see-also">See also: <a href="#repo">Repo</a></p>
   </div>
 
-  <footer>Last updated: March 2026 &nbsp;·&nbsp; Made with Claude Code 🤖</footer>
+  <footer>Made with Claude Code 🤖</footer>
 
   <script>
+    const d = new Date(document.lastModified);
+    document.getElementById('last-updated').textContent =
+      'Last updated: ' + d.toLocaleString('en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+
     const search = document.getElementById('search');
     const terms = document.querySelectorAll('.term');
     const noResults = document.getElementById('no-results');
